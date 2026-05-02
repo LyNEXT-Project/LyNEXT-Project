@@ -1,20 +1,20 @@
 #!/bin/bash
 
 IS_OFFICIAL() {
-    CURRENT_SIGNATURE=$(printf "%s" "$LUMIROM_BUILD" | sha256sum | cut -d ' ' -f 1)
+    CURRENT_SIGNATURE=$(printf "%s" "$LY_BUILD" | sha256sum | cut -d ' ' -f 1)
 
     if [ "$CURRENT_SIGNATURE" == "$OFFICIAL_HASH" ]; then
         export BUILD_STATUS="OFFICIAL"
-        export ROM_TAG="✨ LumiROM Official Build"
+        export ROM_TAG="✨ LyNEXT Official build"
         
         echo "BUILD_STATUS=OFFICIAL" >> "$GITHUB_ENV"
-        echo "ROM_TAG=✨ LumiROM Official Build" >> "$GITHUB_ENV"
+        echo "ROM_TAG=✨ LyNEXT Official build" >> "$GITHUB_ENV"
     else
         export BUILD_STATUS="UNOFFICIAL"
-        export ROM_TAG="🛠️ LumiROM Unofficial Build"
+        export ROM_TAG="🛠️ LyNEXT Unofficial/Debug build"
         
         echo "BUILD_STATUS=UNOFFICIAL" >> "$GITHUB_ENV"
-        echo "ROM_TAG=🛠️ LumiROM Unofficial Build" >> "$GITHUB_ENV"
+        echo "ROM_TAG=🛠️ LyNEXT Unofficial/Debug build" >> "$GITHUB_ENV"
     fi
 
     echo "--- $ROM_TAG detected ---"
