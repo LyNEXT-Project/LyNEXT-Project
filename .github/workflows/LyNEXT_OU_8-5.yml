@@ -1,4 +1,4 @@
-name: LumiROM Tools
+name: LyNEXT
 
 on:
   workflow_dispatch:
@@ -100,7 +100,7 @@ jobs:
         LUMIROM_BUILD: ${{ secrets.LUMIROM_BUILD }}
         OFFICIAL_HASH: ${{ secrets.OFFICIAL_HASH }}
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         IS_OFFICIAL
 
     - name: Download firmware
@@ -137,7 +137,7 @@ jobs:
     - name: Apply vendor patches
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         DISABLE_FBE "FIRMWARE"
         DISABLE_FDE "FIRMWARE"
         DELETE_ICCC "FIRMWARE"
@@ -147,19 +147,19 @@ jobs:
     - name: Apply stock config
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         APPLY_STOCK_CONFIG "FIRMWARE"
 
     - name: Debloat ROM
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         DEBLOAT "FIRMWARE"
 
     - name: Apply features
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         APPLY_FEATURES "FIRMWARE"
 
     - name: Adding mods
@@ -171,20 +171,20 @@ jobs:
     - name: Update Build ID
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         APPENDING_DISPLAY_ID "FIRMWARE"
 
     - name: Install stock framework-res
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         INSTALL_FRAMEWORK \
           "FIRMWARE/system/system/framework/framework-res.apk"
 
     - name: Decompile framework jars
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         DECOMPILE "$APKTOOL" \
           "FIRMWARE/system/system/framework/ssrm.jar" "$WORK_DIR" &
         DECOMPILE "$APKTOOL" \
@@ -205,7 +205,7 @@ jobs:
     - name: Recompile framework
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         RECOMPILE "$APKTOOL" "$WORK_DIR/ssrm" \
           "FIRMWARE/system/system/framework" "$WORK_DIR" &
         RECOMPILE "$APKTOOL" "$WORK_DIR/services" \
@@ -217,7 +217,7 @@ jobs:
     - name: Build ROM
       shell: bash
       run: |
-        source scripts/LumiROM.sh
+        source scripts/LyNEXT.sh
         BUILD_IMG "FIRMWARE" "$OUTPUT_FILESYSTEM" "$OUT_DIR"
         IMG_TO_BROTLI "$OUT_DIR" "TMP"
 
