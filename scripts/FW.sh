@@ -22,19 +22,19 @@ DOWNLOAD_FIRMWARE() {
 
     # --- Step 1: Determine Version ---
     if [ -n "$VERSION" ]; then
-        echo -e "- ✅ Downloading provided version: $VERSION"
+        echo -e "- [ok] Downloading provided version: $VERSION"
     else
         echo -e "- Fetching latest firmware..."
 
         VERSION=$(python3 -m samloader -m "$MODEL" -r "$CSC" -i "$IMEI" checkupdate 2>&1)
 
         if [ $? -ne 0 ] || [ -z "$VERSION" ]; then
-            echo -e "- ⛔️ MODEL/CSC/IMEI not valid or no update found."
+            echo -e "- [err] MODEL/CSC/IMEI not valid or no update found."
             echo -e "- Error: $VERSION"
             return 1
         fi
 
-        echo -e "- ✅ Latest version found: $VERSION"
+        echo -e "- [ok] Latest version found: $VERSION"
         if [ -n "$GITHUB_ENV" ]; then
             echo "VERSION=$VERSION" >> "$GITHUB_ENV"
         fi
@@ -43,7 +43,7 @@ DOWNLOAD_FIRMWARE() {
     # --- Step 2: Download Firmware ---
     python3 -m samloader -m "$MODEL" -r "$CSC" -i "$IMEI" download -v "$VERSION" -O "$DOWN_DIR"
     if [ $? -ne 0 ]; then
-        echo -e "- ⛔️ Download failed. Check IMEI/MODEL/CSC."
+        echo -e "- [err] Download failed. Check IMEI/MODEL/CSC."
         exit 1
     fi
 
@@ -51,7 +51,7 @@ DOWNLOAD_FIRMWARE() {
     enc_file=$(find "$DOWN_DIR" -name "*.enc*" | head -n 1)
 
     if [ -z "$enc_file" ]; then
-        echo -e "- ⛔️ No encrypted firmware file found!"
+        echo -e "- [err] No encrypted firmware file found!"
         exit 1
     fi
 
@@ -61,7 +61,7 @@ DOWNLOAD_FIRMWARE() {
         -o "${DOWN_DIR}/${MODEL}.zip" >/dev/null 2>&1
 
     if [ $? -ne 0 ]; then
-        echo -e "- ⛔️ Decryption failed."
+        echo -e "- [err] Decryption failed."
         exit 1
     fi
 
@@ -69,7 +69,7 @@ DOWNLOAD_FIRMWARE() {
     file_size=$(du -m "${DOWN_DIR}/${MODEL}.zip" | cut -f1)
 
     echo
-    echo -e "- ✅ Firmware decrypted successfully! Firmware Size: ${file_size} MB"
+    echo -e "- [ok] Firmware decrypted successfully! Firmware Size: ${file_size} MB"
     echo -e "- Saved to: ${DOWN_DIR}/${MODEL}.zip"
 
     # --- Cleanup ---
