@@ -954,9 +954,9 @@ APPLY_FEATURES() {
 	
 
     if [ "$BUILD_STATUS" == "OFFICIAL" ]; then
-        BUILD_PROP "$EXTRACTED_FIRM_DIR" "ro.lumirom.official" "true"
+        BUILD_PROP "$EXTRACTED_FIRM_DIR" "ro.lynext.official" "true"
     else
-        BUILD_PROP "$EXTRACTED_FIRM_DIR" "ro.lumirom.official" "false"
+        BUILD_PROP "$EXTRACTED_FIRM_DIR" "ro.lynext.official" "false"
     fi
 
 }
@@ -1000,7 +1000,7 @@ APPENDING_DISPLAY_ID() {
     # Add a name to build ID, doesnt delete the line, it adds at the end
 	local EXTRACTED_FIRM_DIR="$1"
 
-    APPEND_DISPLAY_ID "$1" "LumiROM $LUMIROM_VERSION $BUILD_STATUS Stable"
+    APPEND_DISPLAY_ID "$1" "LyNEXT Project $LUMIROM_VERSION $BUILD_STATUS Stable"
 }
 
 GEN_FS_CONFIG() {
