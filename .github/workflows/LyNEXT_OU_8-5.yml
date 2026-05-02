@@ -239,7 +239,7 @@ jobs:
         HF_XET_HIGH_PERFORMANCE: "1"
       run: |
         DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-        hf buckets sync ./template hf://buckets/Zears14/lumifiles/out/$DATE/ --include "*.zip"
+        hf buckets sync ./template hf://buckets/ncqtt/lynextout/out/$DATE/ --include "*.zip"
 
     - name: Cleanup
       run: |
