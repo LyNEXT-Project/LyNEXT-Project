@@ -103,7 +103,7 @@ FLASHABLE_ZIP_CREATION() {
         cp TMP/*.transfer.list "$TEMPLATE_DIR"/ 2>/dev/null || true
 
         echo "Creating ZIP package..."
-        ZIP_FILE="LumiROM_${LUMIROM_VERSION}-${BUILD_DATE}_${DEVICE_CODENAME}.zip"
+        ZIP_FILE="LyNEXT-Project_${LUMIROM_VERSION}-${BUILD_DATE}_${DEVICE_CODENAME}.zip"
         [ -f "$ZIP_FILE" ] && rm "$ZIP_FILE"
 
         # ZIP the rom with mixed compression levels (Multithreaded 7z)
