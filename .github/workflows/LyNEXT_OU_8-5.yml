@@ -97,7 +97,7 @@ jobs:
     - name: Check repo
       shell: bash
       env:
-        LUMIROM_BUILD: ${{ secrets.LUMIROM_BUILD }}
+        LY_BUILD: ${{ secrets.LY_BUILD }}
         OFFICIAL_HASH: ${{ secrets.OFFICIAL_HASH }}
       run: |
         source scripts/LyNEXT.sh
